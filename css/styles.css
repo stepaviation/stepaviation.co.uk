@@ -172,6 +172,8 @@ address {
 }
 
 .primary-navigation .nav-contact {
+  justify-content: center;
+  gap: 0;
   border: 1px solid #bfc3bd;
   border-radius: var(--radius);
   padding: 0 19px;
@@ -315,6 +317,12 @@ address {
 .button-dark {
   background: var(--ink);
   color: #fff;
+}
+
+.hero-copy .button {
+  justify-content: center;
+  gap: 0;
+  min-width: 164px;
 }
 
 .button-dark:hover {
@@ -871,7 +879,6 @@ address {
   .primary-navigation .nav-contact {
     padding-inline: 14px;
     min-height: 40px;
-    gap: 16px;
   }
   .has-mobile-menu .menu-toggle {
     display: flex;
@@ -941,6 +948,9 @@ address {
     padding: 15px 20px;
     font-size: 12px;
     gap: 35px;
+  }
+  .hero-copy .button {
+    min-width: 151px;
   }
   .hero-scroll {
     bottom: 15px;
@@ -1071,6 +1081,16 @@ address {
   }
   .footer-brand>a {
     font-size: 24px;
+  }
+}
+
+/* Keep each hero sentence on its own desktop line at the existing type size. */
+@media(min-width:1024px) {
+  .hero-copy {
+    width: min(730px,68%);
+  }
+  .hero h1 {
+    max-width: none;
   }
 }
 

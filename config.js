@@ -7,7 +7,7 @@ window.SITE_CONFIG = {
   HERO_SUPPORTING_TEXT: "Aircraft repair and maintenance, approached with care. Because every detail matters before the next departure.",
   COMPANY_MISSION_TITLE: "Care for the aircraft. Confidence for the journey.",
   COMPANY_MISSION_TEXT: [
-    "Our mission is simple: to bring a thoughtful, precise approach to aircraft repair and maintenance. We believe good engineering begins with attention — to the aircraft, to the details, and to the people who depend on both.",
+    "Our mission is simple: to bring a thoughtful, precise approach to aircraft repair and maintenance. We believe good engineering begins with attention to the aircraft, to the details, and to the people who depend on both.",
     "We aim to build lasting working relationships through clear communication, considered solutions, and care at every stage. From the first conversation to the work ahead, our focus is on helping you move forward with confidence."
   ],
   LOGO_URL: "assets/company-logo.webp",
