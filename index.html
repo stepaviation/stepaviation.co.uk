@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f8f5">
+    <!-- config:META -->
+    <title>Your Company | Precision on the ground. Confidence in the air.</title>
+    <meta name="description" content="Your Company — a considered approach to aircraft repair and maintenance. Learn about our mission and get in touch about your aircraft.">
+    <meta property="og:title" content="Your Company | Precision on the ground. Confidence in the air.">
+    <meta property="og:description" content="Your Company — a considered approach to aircraft repair and maintenance. Learn about our mission and get in touch about your aircraft.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Your Company">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- /config:META -->
+    <link id="site-favicon" rel="icon" href="assets/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="config.js"></script>
+    <script defer src="js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="brand" href="#home" aria-label="Go to home">
+          <img id="company-logo" class="company-logo" width="627" height="102" alt="Company logo" hidden>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" hidden><span class="menu-label">Menu</span><span class="menu-icon" aria-hidden="true"></span></button>
+        <nav class="primary-navigation" id="primary-navigation" aria-label="Main navigation">
+          <a href="#home">Home</a>
+          <a href="#mission">Our Mission</a>
+          <a class="nav-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section id="home" class="hero" aria-labelledby="hero-title">
+        <img id="hero-image" class="hero-image" sizes="100vw" width="1536" height="1024" alt="Aircraft engineers working beside an open jet engine in a light-filled hangar" fetchpriority="high" loading="eager" decoding="async" src="assets/hero-preview.webp" srcset="assets/hero-preview-small.webp 900w, assets/hero-preview.webp 1536w">
+        <div class="hero-tint" aria-hidden="true"></div>
+        <div class="container hero-container">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> Aircraft repair &amp; maintenance</p>
+            <p class="hero-company" data-config="COMPANY_NAME"><!-- config:COMPANY_NAME -->Your Company<!-- /config:COMPANY_NAME --></p>
+            <h1 id="hero-title" data-config="COMPANY_TAGLINE"><!-- config:COMPANY_TAGLINE -->Precision on the ground. Confidence in the air.<!-- /config:COMPANY_TAGLINE --></h1>
+            <p class="hero-description" data-config="HERO_SUPPORTING_TEXT"><!-- config:HERO_SUPPORTING_TEXT -->Aircraft repair and maintenance, approached with care. Because every detail matters before the next departure.<!-- /config:HERO_SUPPORTING_TEXT --></p>
+            <a class="button button-dark" href="#contact">Contact Us <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <a class="hero-scroll" href="#mission"><span>Discover our approach</span><span class="circle-arrow" aria-hidden="true">↓</span></a>
+        <span class="hero-caption" aria-hidden="true">A closer look. A higher standard.</span>
+      </section>
+      <section id="mission" class="mission section-space" aria-labelledby="mission-title">
+        <div class="container mission-layout">
+          <div class="section-label"><span class="section-number" aria-hidden="true">01 /</span><p class="eyebrow">Our Mission</p></div>
+          <div class="mission-content">
+            <h2 id="mission-title" data-config="COMPANY_MISSION_TITLE"><!-- config:COMPANY_MISSION_TITLE -->Care for the aircraft. Confidence for the journey.<!-- /config:COMPANY_MISSION_TITLE --></h2>
+            <div class="mission-paragraphs" id="mission-paragraphs"><!-- config:MISSION_PARAGRAPHS --><p>Our mission is simple: to bring a thoughtful, precise approach to aircraft repair and maintenance. We believe good engineering begins with attention — to the aircraft, to the details, and to the people who depend on both.</p>
+              <p>We aim to build lasting working relationships through clear communication, considered solutions, and care at every stage. From the first conversation to the work ahead, our focus is on helping you move forward with confidence.</p><!-- /config:MISSION_PARAGRAPHS --></div>
+            <div class="mission-signoff"><span class="signoff-line" aria-hidden="true"></span><span>Considered work. Lasting confidence.</span></div>
+          </div>
+        </div>
+      </section>
+      <section id="contact" class="contact section-space" aria-labelledby="contact-title">
+        <div class="container contact-layout">
+          <div class="contact-intro">
+            <div class="section-label"><span class="section-number" aria-hidden="true">02 /</span><p class="eyebrow">Contact</p></div>
+            <h2 id="contact-title">Every great working relationship starts with a conversation.</h2>
+            <p>Tell us about your aircraft and what you need. We look forward to understanding how we can help.</p>
+            <div class="contact-email"><span class="small-label">Email us</span><span data-email><!-- config:EMAIL -->YOUR_COMPANY_EMAIL<!-- /config:EMAIL --></span></div>
+          </div>
+          <form id="contact-form" class="contact-form" method="POST" aria-labelledby="form-heading" action="https://formspree.io/f/YOUR_FORM_ID">
+            <div class="form-heading"><h3 id="form-heading">Send an enquiry</h3><p>All fields are required.</p></div>
+            <div class="form-grid">
+              <div class="form-field"><label for="full-name">Full Name <span aria-hidden="true">*</span></label><input id="full-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required maxlength="150" aria-describedby="full-name-error"><span class="field-error" id="full-name-error"></span></div>
+              <div class="form-field"><label for="email">Email Address <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required maxlength="254" aria-describedby="email-error"><span class="field-error" id="email-error"></span></div>
+              <div class="form-field"><label for="phone">Phone Number <span aria-hidden="true">*</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+44 20 1234 5678" required pattern="\+[1-9][0-9\s\(\)\-]{5,23}" maxlength="25" aria-describedby="phone-hint phone-error"><span class="field-hint" id="phone-hint">Include your country code (for example, +44).</span><span class="field-error" id="phone-error"></span></div>
+              <div class="form-field"><label for="company">Company Name <span aria-hidden="true">*</span></label><input id="company" name="company" type="text" autocomplete="organization" placeholder="Your company" required maxlength="200" aria-describedby="company-error"><span class="field-error" id="company-error"></span></div>
+              <div class="form-field field-wide"><label for="message">Message <span aria-hidden="true">*</span></label><textarea id="message" name="message" rows="5" placeholder="Tell us a little about your requirements…" required maxlength="5000" aria-describedby="message-error"></textarea><span class="field-error" id="message-error"></span></div>
+            </div>
+            <div class="form-bottom"><p class="form-note">Your details will only be used to respond to your enquiry.</p><button class="button button-dark" id="submit-button" type="submit" disabled><span id="submit-label">Send Message</span><span aria-hidden="true">↗</span></button></div>
+            <p class="form-status" id="form-status" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden></p>
+            <noscript><p class="no-script-note">Submitting this form opens our form provider’s confirmation page.</p></noscript>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-main">
+        <div class="footer-brand"><a href="#home" data-config="COMPANY_NAME"><!-- config:COMPANY_NAME -->Your Company<!-- /config:COMPANY_NAME --></a><p>Precision. Care. Confidence.</p></div>
+        <div class="footer-details"><span class="small-label">Registered office</span><address data-config="COMPANY_ADDRESS"><!-- config:COMPANY_ADDRESS -->YOUR_COMPANY_ADDRESS<!-- /config:COMPANY_ADDRESS --></address><p>Company registration: <span data-config="COMPANY_REGISTRATION_NUMBER"><!-- config:COMPANY_REGISTRATION_NUMBER -->YOUR_REGISTRATION_NUMBER<!-- /config:COMPANY_REGISTRATION_NUMBER --></span></p></div>
+        <div class="footer-contact"><span class="small-label">Get in touch</span><span data-email><!-- config:EMAIL -->YOUR_COMPANY_EMAIL<!-- /config:EMAIL --></span><a class="back-to-top" href="#home">Back to top <span aria-hidden="true">↑</span></a></div>
+      </div>
+      <div class="container footer-bottom"><p>© <span id="copyright-year"><!-- config:COPYRIGHT_YEAR -->2026<!-- /config:COPYRIGHT_YEAR --></span> <span data-config="COMPANY_NAME"><!-- config:COMPANY_NAME -->Your Company<!-- /config:COMPANY_NAME --></span>. All rights reserved.</p><p>Built on attention to detail.</p></div>
+    </footer>
+  </body>
+</html>
