@@ -689,6 +689,7 @@ address {
   margin-block: 38px 14px;
 }
 .policy-content p + p { margin-top: 14px; }
+.policy-content .policy-home-link { margin-top: 28px; }
 .policy-content ul { padding-left: 24px; }
 .policy-content li + li { margin-top: 8px; }
 .policy-updated { color: var(--muted); font-size: 13px; }
