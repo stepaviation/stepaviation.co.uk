@@ -101,21 +101,24 @@
     if (!element) { element = document.createElement("meta"); element.setAttribute(attribute, name); document.head.append(element); }
     element.content = value;
   }
-  const title = [string(config.COMPANY_NAME), string(config.COMPANY_TAGLINE)].filter(Boolean).join(" | ");
-  if (title) { document.title = title; setMeta("property", "og:title", title); }
-  const description = string(config.META_DESCRIPTION) || string(config.COMPANY_TAGLINE);
-  setMeta("name", "description", description);
-  setMeta("property", "og:description", description);
-  setMeta("property", "og:site_name", string(config.COMPANY_NAME));
-  const canonical = domainURL(config.CUSTOM_DOMAIN);
-  const socialImage = assetURL(config.OG_IMAGE_URL);
-  if (canonical) {
-    let link = document.querySelector('link[rel="canonical"]');
-    if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.append(link); }
-    link.href = canonical;
-    setMeta("property", "og:url", canonical);
-    setMeta("property", "og:image", new URL(socialImage || "assets/social-preview.jpg", canonical).href);
-  } else if (/^https:\/\//i.test(socialImage)) setMeta("property", "og:image", socialImage);
+  // Preserve the dedicated privacy page's title, canonical URL and metadata.
+  if (document.body.dataset.page !== "privacy") {
+    const title = [string(config.COMPANY_NAME), string(config.COMPANY_TAGLINE)].filter(Boolean).join(" | ");
+    if (title) { document.title = title; setMeta("property", "og:title", title); }
+    const description = string(config.META_DESCRIPTION) || string(config.COMPANY_TAGLINE);
+    setMeta("name", "description", description);
+    setMeta("property", "og:description", description);
+    setMeta("property", "og:site_name", string(config.COMPANY_NAME));
+    const canonical = domainURL(config.CUSTOM_DOMAIN);
+    const socialImage = assetURL(config.OG_IMAGE_URL);
+    if (canonical) {
+      let link = document.querySelector('link[rel="canonical"]');
+      if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.append(link); }
+      link.href = canonical;
+      setMeta("property", "og:url", canonical);
+      setMeta("property", "og:image", new URL(socialImage || "assets/social-preview.jpg", canonical).href);
+    } else if (/^https:\/\//i.test(socialImage)) setMeta("property", "og:image", socialImage);
+  }
 
   const menuButton = document.querySelector(".menu-toggle");
   const navigation = document.getElementById("primary-navigation");
@@ -135,7 +138,8 @@
     });
     navigation.addEventListener("click", (event) => {
       if (!event.target.closest("a")) return;
-      const target = document.querySelector(event.target.closest("a").getAttribute("href"));
+      const href = event.target.closest("a").getAttribute("href");
+      const target = href && href.startsWith("#") ? document.querySelector(href) : null;
       closeMenu();
       if (target && mobile.matches) {
         target.setAttribute("tabindex", "-1");
@@ -178,16 +182,23 @@
   if (configured) form.action = `https://formspree.io/f/${formID}`;
   form.noValidate = true;
   let pending = false;
-  const fields = Array.from(form.querySelectorAll("input[required], textarea[required]"));
+  const fields = Array.from(form.querySelectorAll("input:not([type=hidden]), textarea"));
   function validate(field) {
+    field.setCustomValidity("");
     let error = "";
     const value = field.value.trim();
-    if (!value) error = "Please complete this field.";
-    else if (field.type === "email" && field.validity.typeMismatch) error = "Enter a valid email address.";
+    if (!value && field.required) error = "Please complete this field.";
+    // The HTML pattern also protects native submission without JavaScript.
+    // Uses browser email syntax plus a dotted domain, without a TLD allowlist.
+    // ASCII mailboxes / punycode domains are supported; quoted local parts,
+    // Unicode mailboxes and address literals depend on native type=email support.
+    // The existing 254-character limit is the conventional mailbox limit.
+    else if (field.type === "email" && (field.validity.typeMismatch || field.validity.patternMismatch || field.validity.tooLong)) error = "Please enter a valid email address, for example name@example.com.";
     else if (field.id === "phone") {
       const digits = value.replace(/\D/g, "").length;
       if (!/^\+[1-9][0-9 ()-]+$/.test(value) || digits < 7 || digits > 15) error = "Enter your country code and phone number, for example +44 20 1234 5678.";
     } else if (field.validity.tooLong) error = "Please shorten this entry.";
+    field.setCustomValidity(error);
     const errorElement = document.getElementById(`${field.id}-error`);
     if (errorElement) errorElement.textContent = error;
     if (error) field.setAttribute("aria-invalid", "true");
@@ -214,7 +225,7 @@
       return;
     }
     if (!configured) {
-      announce("This enquiry form is not connected yet. Please use the company’s published contact details to get in touch.", "error", true);
+      announce("This enquiry form is not connected yet. Please use the companyвЂ™s published contact details to get in touch.", "error", true);
       return;
     }
     if (!("fetch" in window) || !("AbortController" in window)) {
@@ -224,9 +235,9 @@
     }
     pending = true;
     submit.disabled = true;
-    submitLabel.textContent = "Sending…";
+    submitLabel.textContent = "SendingвЂ¦";
     form.setAttribute("aria-busy", "true");
-    announce("Sending your enquiry…", "pending");
+    announce("Sending your enquiryвЂ¦", "pending");
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 20000);
     try {
@@ -256,7 +267,6 @@
       form.removeAttribute("aria-busy");
     }
   });
-  // The unconfigured static button is disabled to prevent placeholder requests
-  // without JavaScript. Enable it only after the guarded listener is attached.
+  // Keep enhanced submission available after attaching the guarded listener.
   submit.disabled = false;
 })();

@@ -330,7 +330,7 @@ address {
   transform: translateY(-1px);
 }
 
-.button>span:last-child {
+.button>span[aria-hidden=true] {
   font-size: 20px;
   line-height: 1;
 }
@@ -616,7 +616,54 @@ address {
 
 .form-bottom .button {
   flex-shrink: 0;
+  justify-content: center;
+  gap: 0;
+  min-width: 185px;
 }
+
+.privacy-note { margin-top: 8px; }
+.privacy-note a,.privacy-link,.policy-content a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.privacy-note a:hover,.privacy-link:hover,.policy-content a:hover { color: var(--ink); }
+
+/* Reading layout for the dedicated privacy page; homepage layout is retained. */
+.policy-content {
+  max-width: 780px;
+  padding-block: clamp(48px,7vw,96px);
+  font-size: 16px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+.policy-content h1 {
+  font-size: clamp(42px,6vw,64px);
+  font-weight: 400;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  margin-block: 22px 16px;
+}
+.policy-content h2 {
+  font-size: clamp(23px,3vw,29px);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -.6px;
+  margin-block: 38px 14px;
+}
+.policy-content p + p { margin-top: 14px; }
+.policy-content ul { padding-left: 24px; }
+.policy-content li + li { margin-top: 8px; }
+.policy-updated { color: var(--muted); font-size: 13px; }
+.policy-review {
+  margin-block: 28px;
+  padding: 20px 24px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.policy-review h2 { margin-top: 0; }
+.policy-confirmation { color: var(--muted); font-size: 14px; }
 
 .form-status {
   font-size: 12px;
