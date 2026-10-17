@@ -195,7 +195,7 @@
     // ASCII mailboxes / punycode domains are supported; quoted local parts,
     // Unicode mailboxes and address literals depend on native type=email support.
     // The existing 254-character limit is the conventional mailbox limit.
-    else if (field.type === "email" && (field.validity.typeMismatch || field.validity.patternMismatch || field.validity.tooLong)) error = "Please enter a valid email address, for example name@example.com.";
+    else if (field.type === "email" && (field.validity.typeMismatch || field.validity.patternMismatch || field.validity.tooLong)) error = "Please enter a valid email address, for example you@company.com.";
     else if (field.id === "phone") {
       // Optional; validate only a supplied number, using the same native rule.
       // Accept international formatting without arbitrary minimum/maximum lengths.
