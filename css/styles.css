@@ -599,6 +599,43 @@ address {
   border-color: var(--error);
 }
 
+.form-acknowledgement {
+  margin-top: 24px;
+}
+
+.acknowledgement-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 44px;
+  padding-block: 10px;
+  font-size: 12px;
+  line-height: 1.8;
+  cursor: pointer;
+}
+
+.acknowledgement-label input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
+  accent-color: var(--ink);
+  cursor: pointer;
+}
+
+.acknowledgement-label span {
+  min-width: 0;
+}
+
+.form-acknowledgement [aria-invalid=true] {
+  outline: 2px solid var(--error);
+  outline-offset: 3px;
+}
+
+.form-acknowledgement + .form-bottom {
+  margin-top: 16px;
+}
+
 .form-bottom {
   display: flex;
   justify-content: space-between;

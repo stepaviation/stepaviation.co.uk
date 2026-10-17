@@ -187,7 +187,9 @@
     field.setCustomValidity("");
     let error = "";
     const value = field.value.trim();
-    if (!value && field.required) error = "Please complete this field.";
+    if (field.type === "checkbox") {
+      if (field.required && !field.checked) error = "Please confirm that we may contact you regarding your enquiry.";
+    } else if (!value && field.required) error = field.id === "company" ? "Please enter your company name." : "Please complete this field.";
     // The HTML pattern also protects native submission without JavaScript.
     // Uses browser email syntax plus a dotted domain, without a TLD allowlist.
     // ASCII mailboxes / punycode domains are supported; quoted local parts,
@@ -195,8 +197,9 @@
     // The existing 254-character limit is the conventional mailbox limit.
     else if (field.type === "email" && (field.validity.typeMismatch || field.validity.patternMismatch || field.validity.tooLong)) error = "Please enter a valid email address, for example name@example.com.";
     else if (field.id === "phone") {
-      const digits = value.replace(/\D/g, "").length;
-      if (!/^\+[1-9][0-9 ()-]+$/.test(value) || digits < 7 || digits > 15) error = "Enter your country code and phone number, for example +44 20 1234 5678.";
+      // Optional; validate only a supplied number, using the same native rule.
+      // Accept international formatting without arbitrary minimum/maximum lengths.
+      if (field.validity.patternMismatch) error = "If you provide a telephone number, include the country code, for example +44 20 1234 5678.";
     } else if (field.validity.tooLong) error = "Please shorten this entry.";
     field.setCustomValidity(error);
     const errorElement = document.getElementById(`${field.id}-error`);
@@ -208,6 +211,7 @@
   fields.forEach((field) => {
     field.addEventListener("blur", () => { if (field.value || field.hasAttribute("aria-invalid")) validate(field); });
     field.addEventListener("input", () => { if (field.hasAttribute("aria-invalid")) validate(field); });
+    if (field.type === "checkbox") field.addEventListener("change", () => validate(field));
   });
   function announce(message, state, focus = false) {
     status.textContent = message;
@@ -225,7 +229,7 @@
       return;
     }
     if (!configured) {
-      announce("This enquiry form is not connected yet. Please use the companyвЂ™s published contact details to get in touch.", "error", true);
+      announce("This enquiry form is not connected yet. Please use the company’s published contact details to get in touch.", "error", true);
       return;
     }
     if (!("fetch" in window) || !("AbortController" in window)) {
@@ -235,9 +239,9 @@
     }
     pending = true;
     submit.disabled = true;
-    submitLabel.textContent = "SendingвЂ¦";
+    submitLabel.textContent = "Sending…";
     form.setAttribute("aria-busy", "true");
-    announce("Sending your enquiryвЂ¦", "pending");
+    announce("Sending your enquiry…", "pending");
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 20000);
     try {
