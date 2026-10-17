@@ -189,7 +189,7 @@
     const value = field.value.trim();
     if (field.type === "checkbox") {
       if (field.required && !field.checked) error = "Please confirm that we may contact you regarding your enquiry.";
-    } else if (!value && field.required) error = field.id === "company" ? "Please enter your company name." : "Please complete this field.";
+    } else if (!value && field.required) error = "Please complete this field.";
     // The HTML pattern also protects native submission without JavaScript.
     // Uses browser email syntax plus a dotted domain, without a TLD allowlist.
     // ASCII mailboxes / punycode domains are supported; quoted local parts,
